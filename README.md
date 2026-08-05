@@ -31,7 +31,7 @@ GPIO Input
 GPIO Output
 Push Button Interfacing
 LED Control
-Problem 1.2 – Toggle Lighting Mode
+Problem 1.2 – Toggle Lighting Mode (skipped toggle setup, since planned to use latching switch, incase planning to use digital switch then toggle setup is required)
 Why are we building it?
 
 Home owners normally expect a switch-like behavior instead of holding a button continuously.
