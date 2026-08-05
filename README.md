@@ -1,4 +1,4 @@
- For an Arduino UNO beginner-to-intermediate roadmap,
+For an Arduino UNO beginner-to-intermediate roadmap,
 A better progression is:
 
 LED → Time Logic → Sensor Logic → Multi-Sensor Integration → Basic IoT
