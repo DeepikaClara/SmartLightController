@@ -1,39 +1,27 @@
 //Smart Light Controller
 /* Method 1: Basic Automatic Lighting Using Program Logic 
-Problem 1.1 – Manual Light Control Why are we building it?
+Problem 1.1 – Manual Light Control
 
 Before automating a house light, the developer must understand how to control an output device from Arduino.
+Solution: When a push button is pressed, turn ON an LED. When the button is released, turn OFF the LED.
 
-When a push button is pressed, turn ON an LED. When the button is released, turn OFF the LED.
-
-Expected Output Button Pressed
-
-Light Status : ON
+Expected Output: Button Pressed & Light Status : ON
 
 C Concepts: Variables, Data Types, if statements, Digital state handling 
 Embedded Concepts: GPIO Input, GPIO Output, Push Button Interfacing, LED Control
 -------------------------------------------------------
-Problem 1.2 – Toggle Lighting Mode (skipped toggle setup, since planned to use latching switch, incase planning to use digital switch then toggle setup is required) Why are we building it?
+Problem 1.2 – Toggle Lighting Mode (skipped toggle setup, since planned to use latching switch, incase planning to use digital switch then toggle setup is required)
 
 Home owners normally expect a switch-like behavior instead of holding a button continuously.
+Solution:Each button press should change the light state.Press 1 → ON Press 2 → OFF Press 3 → ON
 
-What exactly must the system do?
+Expected Output: Button Pressed & Light Status : ON
 
-Each button press should change the light state.
-
-Press 1 → ON Press 2 → OFF Press 3 → ON
-
-Expected Output Button Pressed
-
-Light Status : ON
-
-C Concepts Variables State Management Conditional Logic Embedded Concepts Button Debouncing Digital Inputs LED Output Control
+C Concepts: Variables, State Management, Conditional Logic.
+Embedded Concepts: Button, Debouncing, Digital Inputs, LED Output Control
 -------------------------------------------------------------------------------------
-Problem 1.3 – Lighting Status Monitor Why are we building it?
-
-Users need visibility into the operation of the controller.
-
-What exactly must the system do?
+Problem 1.3 – Lighting Status Monitor
+Solution: Users need visibility into the operation of the controller.
 
 Display:Button State Light State over Serial Monitor.
 Expected Output: Button -PRESSED & Light : ON
@@ -41,13 +29,17 @@ Expected Output: Button -PRESSED & Light : ON
 C Concepts: Functions, Formatted Printing Program Structure
 Embedded Concepts: UART Communication, Serial Monitor
 -----------------------------------------------------------------
-Problem 1.4 – Configurable Auto OFF Timer Why are we building it?
+Problem 1.4 – Configurable Auto OFF Timer
+
 Outdoor lights are often forgotten after switching ON.
 Solution: After turning ON, keep the light active for 30 seconds and then automatically switch OFF.
+
 Expected Output:  Light ON , Timer Running... ,Light OFF
+
 C Concepts: Timers, Variables, Functions.
 Embedded Concepts: millis(). Software Timing, Non-Blocking Design. 
 */
+
 uint8_t button = 4;
 uint8_t LED =8;
 boolean last_led_state = LOW;
