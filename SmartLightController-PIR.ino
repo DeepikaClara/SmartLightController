@@ -33,16 +33,18 @@ Expected Output Motion Events : 25 | ON Duration : 72 Minutes | Energy Saved : 1
 C Concepts: Calculations, Accumulators, Counters. 
 Embedded Concepts: Runtime, Logging Data Collection.
 */
-uint8_t pir_pin = 8;
-uint8_t led_pin = 4;
-uint8_t wait_time_for_Low = 10000;
-boolean previous_detection = LOW;
-uint8_t time_turned_Low;
+const uint8_t pir_pin = 8;
+const uint8_t led_pin = 4;
+unsigned long wait_time_off = 5000;
+bool previous_pir_state= LOW;
+bool led_reset= 0;
+unsigned long timer=0;
+
 void setup() {
   // put your setup code here, to run once:
 pinMode(pir_pin,INPUT);
 pinMode(led_pin,OUTPUT);
-uint8_t calibration_time = 30;//time required for the sensor to stabilize after getting power, so that false detections will be avoided.
+uint8_t calibration_time = 3;//time required for the sensor to stabilize after getting power, so that false detections will be avoided.
 
 Serial.begin(9600);
 Serial.println("PIR Sensor under calibration...");
@@ -52,31 +54,36 @@ Serial.println("PIR Sensor is ACTIVE!..");
 
 void loop() {
   // put your main code here, to run repeatedly:
-  boolean current_detection = digitalRead(pir_pin);
+  bool current_pir_state = digitalRead(pir_pin);
+  
 
-  if(current_detection == HIGH)
+  if((previous_pir_state ==LOW ) && (current_pir_state == HIGH))
   {
-    Serial.println("Motion Detected!");
-    digitalWrite(led_pin, HIGH);
-    Serial.println("LED is ON...");
-    delay(1000);
-    previous_detection = current_detection;
+    Serial.println("Motion Detection");
+      digitalWrite(led_pin, HIGH);
+      Serial.println("LED is ON...");
+      //led_reset = 1;
+      previous_pir_state = HIGH;
+  
   }
-  else if((previous_detection != current_detection ) && (current_detection == LOW ))
+  else if((previous_pir_state == HIGH ) && (current_pir_state == LOW ) )
   {
-    Serial.println("Motion Ended..");
-    digitalWrite(led_pin,LOW);
-    previous_detection = current_detection;
-    time_turned_Low = millis();
-    
+   Serial.println("Motion Ended");
+   timer = millis();
+   Serial.print("Timer Started at:");
+   Serial.println(timer);
+   previous_pir_state = LOW;
+   led_reset=0;
   }
-
-if((current_detection == LOW) && (millis()-time_turned_Low)> wait_time_for_Low)
+//Serial.println(millis());
+//delay(1000);
+if((current_pir_state == LOW ) && ((millis() - timer)> wait_time_off) && (led_reset ==0))
     {
-      Serial.println("No Motion Detected!");
-      digitalWrite(led_pin,LOW);
-      Serial.println("LED is OFF");
-      delay(1000);
+       Serial.println("No Motion Confirmed..");
+      digitalWrite(led_pin, LOW);
+      Serial.println("LED is OFF...");
+      led_reset = 1;
+      
     }
 
 }
