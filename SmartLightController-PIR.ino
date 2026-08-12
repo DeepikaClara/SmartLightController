@@ -35,7 +35,7 @@ Embedded Concepts: Runtime, Logging Data Collection.
 */
 const uint8_t pir_pin = 8;
 const uint8_t led_pin = 4;
-unsigned long wait_time_off = 5000;
+unsigned long wait_time_off = 30000;
 bool previous_pir_state= LOW;
 bool led_reset= 0;
 unsigned long timer=0;
@@ -44,7 +44,7 @@ void setup() {
   // put your setup code here, to run once:
 pinMode(pir_pin,INPUT);
 pinMode(led_pin,OUTPUT);
-uint8_t calibration_time = 3;//time required for the sensor to stabilize after getting power, so that false detections will be avoided.
+uint8_t calibration_time = 30;//time required for the sensor to stabilize after getting power, so that false detections will be avoided.
 
 Serial.begin(9600);
 Serial.println("PIR Sensor under calibration...");
