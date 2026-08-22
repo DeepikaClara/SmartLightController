@@ -15,14 +15,6 @@ Expected Output No Motion | Shutdown In Progress... | Light OFF
 C Concepts: Timers, Counters. 
 Embedded Concepts: millis(), Embedded Timing. 
 --------------------------------
-Problem 4.4 – Energy Saving Statistics - Users want proof that automation reduces energy consumption.
-Solution:
-Display: Motion Count, Light ON Duration, Estimated Energy Saved. 
-
-Expected Output Motion Events : 25 | ON Duration : 72 Minutes | Energy Saved : 18%
-
-C Concepts: Calculations, Accumulators, Counters. 
-Embedded Concepts: Runtime, Logging Data Collection.
 */
 const uint8_t pir_pin = 7;
 const uint8_t led_pin = 8;
